@@ -1,9 +1,4 @@
 <?php
-/*
-    Exercício 3
-    Tabuada (de 1 a 10) de um número específico
-    usando a estrutura de repetição for
-*/
 
 $numero = 7; // número de teste - pode alterar aqui
 

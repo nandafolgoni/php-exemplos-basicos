@@ -1,10 +1,4 @@
 <?php
-/*
-    Exercício 4
-    Vetor (array) com as notas de 5 alunos de uma turma.
-    Percorre o vetor com foreach para calcular a média,
-    a maior e a menor nota da turma
-*/
 
 $notas = [7.5, 8.0, 5.5, 9.0, 6.5]; // vetor de teste
 

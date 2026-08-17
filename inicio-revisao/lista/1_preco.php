@@ -1,10 +1,4 @@
 <?php
-/*
-    Exercício 1
-    Programa lê o preço de um produto e a quantidade comprada,
-    calcula o valor total (preço x quantidade) e aplica 10% de
-    desconto quando o total for maior ou igual a R$ 200,00
-*/
 
 $precoProduto = 45.90; // valor de teste - pode alterar aqui
 $quantidade   = 5;     // valor de teste - pode alterar aqui

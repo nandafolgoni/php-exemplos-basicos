@@ -1,11 +1,4 @@
 <?php
-/*
-    Exercício 2
-    Verificação de aprovação de aluno:
-    - Média maior ou igual a 6,0
-    - Faltas menores ou iguais a 15
-    Usando o operador lógico &&
-*/
 
 $media = 7.5;   // valor de teste
 $faltas = 10;   // valor de teste

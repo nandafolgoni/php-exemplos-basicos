@@ -1,11 +1,4 @@
 <?php
-/*
-    Exercício 5
-    Função calcularIMC($peso, $altura)
-    Recebe peso e altura, calcula o IMC (peso / altura²)
-    e retorna apenas o valor calculado.
-    A classificação é feita no programa principal.
-*/
 
 function calcularIMC($peso, $altura) {
     $imc = $peso / ($altura * $altura);
