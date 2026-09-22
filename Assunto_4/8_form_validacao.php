@@ -2,10 +2,12 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Formulário de Feedback</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário com validação</title>
 </head>
 <body>
     <form method="post" action="">
+
         <label for="nome">Nome:</label>
         <input type="text" name="nome" required><br>
 
@@ -16,21 +18,22 @@
         <textarea name="mensagem" required></textarea><br>
 
         <button type="submit">Enviar</button>
+
     </form>
 
+    <!-- Parte da lógica -->
     <?php
-    // Verifica se o formulário foi enviado
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        // Recebe os valores enviados pelo formulário
+        // Recebe os dados
         $nome = $_POST['nome'];
         $email = $_POST['email'];
         $mensagem = $_POST['mensagem'];
 
-        // Valida se os campos não estão vazios e o email é válido
+        // Validação dos campos (Se estão vazios e se e-mail é valido)
         if (!empty($nome) && !empty($email) && filter_var($email, FILTER_VALIDATE_EMAIL) && !empty($mensagem)) {
-            echo "<p style='color: green;'>Feedback enviado com sucesso!</p>";
+            echo "<p style='color: Darkgreen;'>Feedback enviado com sucesso!</p>";
         } else {
-            echo "<p style='color: red;'>Por favor, preencha todos os campos corretamente.</p>";
+            echo "<p style='color: red;'>Preencha todos os campos corretamente!</p>";
         }
     }
     ?>
