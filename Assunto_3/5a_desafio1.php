@@ -1,48 +1,67 @@
+<?php
+session_start(); // Deve ser a primeira linha do script PHP, antes de qualquer saída HTML
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $nome = $_POST['nome'];
+    $senha = $_POST['senha']; // Representa o ano de nascimento
+
+    $idade = 2026 - $senha; // Ou use date('Y') - $senha para pegar o ano atual dinamicamente
+
+    // Grava as informações no log
+    $arquivo = fopen('log_acessos.txt', 'a');
+    $linha = $nome . ';' . $idade . "\n";
+    fwrite($arquivo, $linha);
+    fclose($arquivo);
+
+    $_SESSION['nome_usuario'] = $nome;
+
+    // Verifica se é maior de idade
+    if ($idade >= 18) {
+        header('Location: ' . $_SERVER['PHP_SELF'] . '?sucesso=1');
+    } else {
+        header('Location: ' . $_SERVER['PHP_SELF'] . '?negado=1');
+    }
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verificador de maior idade</title>
+    <title>Verificador de maioridade</title>
 </head>
 <body>
-
-<h1>Verificador de maior idade</h1>
-
     <!-- Formulário -->
     <form method="post" action="">
-
         <!-- Campo nome -->
         <label for="nome">Nome:</label>
-        <input type="text" name="nome" required>
+        <input type="text" name="nome" id="nome" required><br>
 
-        <!-- Campo senha -->
-        <label for="idade">Ano de Nascimento:</label>
-        <input type="text" name="idade" required>
-       
+        <!-- Campo data/ano de nascimento -->
+        <label for="senha">Ano de nascimento:</label>
+        <input type="number" name="senha" id="senha" required><br>
+
         <!-- Botão de cadastro -->
-        <button type="submit">Verificar</button>
-
+        <button type="submit">Calcular</button>
     </form>
 
-<!-- Lógica para gravar as informações -->
-<?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $nome = $_POST["nome"];
-    $anoNascimento = $_POST["idade"];
+    <!-- Lógica para exibir mensagens -->
+    <?php
+    if (isset($_SESSION['nome_usuario'])) {
+        $nomeUsuario = $_SESSION['nome_usuario'];
 
-    $anoAtual = date("Y");
-    $idade = $anoAtual - $anoNascimento;
+        if (isset($_GET['sucesso'])) {
+            echo "<p'>Acesso permitido, {$nomeUsuario}!</p>";
+        } elseif (isset($_GET['negado'])) {
+            echo "<p>Acesso negado, {$nomeUsuario}! Você é menor de idade.</p>";
+        }
 
-    if ($idade >= 18) {
-        echo "<p>✅ Acesso permitido, $nome!</p>";
+        // Limpa a sessão após exibir a mensagem
+        unset($_SESSION['nome_usuario']);
 
-        // Salva no arquivo de log
-        $linha = "Nome: $nome | Idade: $idade\n";
-        file_put_contents("log_acessos.txt", $linha, FILE_APPEND);
-    } else {
-        echo "<p>❌ Acesso negado, $nome!</p>";
+        // Atualiza/redireciona a página após 3 segundos
+        header('Refresh: 3; url=' . $_SERVER['PHP_SELF']);
     }
-}
-
-?>
+    ?>
+</body>
+</html>

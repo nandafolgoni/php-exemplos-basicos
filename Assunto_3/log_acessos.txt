@@ -2,3 +2,6 @@ Nome: gustavo | Idade: 28
 Nome: livia | Idade: 18
 Nome: livia | Idade: 18
 Nome: livia | Idade: 18
+fernanda;2014
+natalia;2006
+fernanda;2020
